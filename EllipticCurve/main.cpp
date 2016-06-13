@@ -10,18 +10,21 @@
 #define big long long
 using namespace std;
 
+//условие задачи
 big q = 12251;
 big A= -3;
 big B= 10;
 big x = 35;
 big y = 1230;
 
+//позволяет работать с числом в поле
 big trim(big a){
     big b = a % q;
     if(b<0) b+=q;
     return b;
 }
 
+//бинарное возведение в степень
 big pow(big a, big n){
     if (n == 0)
         return 1;
@@ -33,35 +36,45 @@ big pow(big a, big n){
     }
 }
 
+//обратный элемент числа в поле
 big obr(big a)
 {
     big b = pow(trim(a), q-2);
     return b;
 }
 
+//структура точки
 struct Point
 {
     big x,y;
+    
+    //нулевой элемент, не принадлежит эллиптической кривой над конечным полем полем
     Point() // zero
     {
         this->x=q+1;
         this->y=q+1;
     }
+    
+    //конструктор
     Point(big x, big y)
     {
         this->x=x;
         this->y=y;
     }
     
+    //сравнение точек ==
     bool operator==(const Point &b )
     {
         return this->x==b.x && this->y==b.y;
     }
+    
+    //сравнение точек !=
     bool operator!=(const Point &b )
     {
         return !(*this == b);
     }
     
+    //сложение точек
     Point operator+(const Point &b)
     {
         Point a = *this;
@@ -96,6 +109,7 @@ struct Point
         return r;
     }
     
+    //вычитание точек
     Point operator-(const Point &b)
     {
         Point a = *this;
@@ -104,6 +118,7 @@ struct Point
         return a+c;
     }
     
+    //умножение точки на число
     Point operator*(const big c)
     {
         Point a = *this;
@@ -114,6 +129,7 @@ struct Point
         return b;
     }
     
+    //преобразовать точку в строковый вид
     string toStr(){
         string s="";
         if(*this == Point()){
@@ -124,14 +140,17 @@ struct Point
         return s;
     }
     
+    //напечатать точку в консоль
     void print() {
         cout<<toStr()<<endl;
     }
 
 };
 
+//точка-генератор
 Point p(x,y);
 
+//само задание
 Point AliceGeneratePoint(big a){
     
     Point pA = p*a;
@@ -165,7 +184,9 @@ Point AliceResolvePoint(big a, pair<Point,Point> pB){
     return pM;
     
 }
+//конец задания
 
+//начало задания *
 Point AliceGeneratePointZ(big a){
     
     Point pA = p*a;
@@ -205,11 +226,14 @@ Point AliceResolvePointZ(big a, pair<Point, pair<big, big>> pB){
     return pM;
     
 }
+//конеч задания *
 
 
+//массив всех точек, но хранится в нем только первая найденная точка
 vector<Point> allPoints;
-void findAllPoints() //метод работает долго, поэтому находим только первую точку
-{
+
+//метод работает долго, поэтому находим только первую точку
+void findAllPoints() {
     for (big x=0; x<q; x++) {
         for (big y=0; y<q; y++) {
             if(pow(y,2) == trim(pow(x,3)+A*x+B)){
@@ -221,6 +245,7 @@ void findAllPoints() //метод работает долго, поэтому н
     cout<<"Точек на кривой в заданном поле: "<<allPoints.size()<<endl;
 }
 
+//ElGamal Public Key Cryptosystem
 void ElGamal(){
     cout<<"ElGamal"<<endl;
     big a = 3;
@@ -245,6 +270,7 @@ void ElGamal(){
 
 }
 
+//Задание 1*
 void Task1(){
     cout<<"Задача 1"<<endl;
     big a = 3;
