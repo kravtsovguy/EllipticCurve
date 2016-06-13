@@ -44,8 +44,8 @@ struct Point
     big x,y;
     Point() // zero
     {
-        this->x=0;
-        this->y=0;
+        this->x=q+1;
+        this->y=q+1;
     }
     Point(big x, big y)
     {
