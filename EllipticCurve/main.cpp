@@ -226,7 +226,7 @@ Point AliceResolvePointZ(big a, pair<Point, pair<big, big>> pB){
     return pM;
     
 }
-//конеч задания *
+//конец задания *
 
 
 //массив всех точек, но хранится в нем только первая найденная точка
